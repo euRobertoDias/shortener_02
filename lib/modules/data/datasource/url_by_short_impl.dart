@@ -7,7 +7,7 @@ import 'package:shortener_02/modules/infra/datasources/url_by_short.dart';
 import 'package:shortener_02/modules/infra/models/urls_model.dart';
 
 class UrlByShortImpl implements UrlByShort {
-  var db = DatasourceHelper.instance;
+  DatasourceHelper db;
   Client client;
   UrlByShortImpl(this.client, this.db);
 
@@ -20,7 +20,6 @@ class UrlByShortImpl implements UrlByShort {
     if(response.statusCode == 200) {
       final json = jsonDecode(response.body);
       final urlsObj = UrlsModel(
-        id: 1,
         long: urlText,
         short: json['shorturl'],
         status: false,
